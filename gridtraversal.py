@@ -30,11 +30,23 @@ class Solution:
         # type n: int
         # return: int
         
-        # TODO: Write code below to return an int with the solution to the prompt
-        if (m == 1 or n == 1):
-            return 1
+        # TODO: Write code below to return an int with the solution to the prompt        
+        if m<=0 or n<= 0:
+            return 0
+
+        count = [None] * m
+        for i in range(m):
+            count[i] = [0] * n
+        for i in range(m):
+            count[i][0] = 1
+        for i in range(n):
+            count[0][i] = 1
         
-        return self.uniquePaths(m-1, n) + self.uniquePaths(m, n-1)
+        for i in range(1, m):
+            for j in range(1, n):
+                count[i][j] = count[i-1][j] + count[i][j-1]
+
+        return count[m-1][n-1]
 
 def main():
     num1 = int(input())
